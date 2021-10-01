@@ -1,16 +1,39 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IPoolable
 {
-    [SerializeField] private Rigidbody Rigidbody;
     [SerializeField] private float BulletSpeed = 100;
 
-    void Start()
+    private Rigidbody _rigidbody;
+    private float _lifeTime;
+
+    public bool Free { get; set; }
+
+    public ObjectPool NextPool { get; }
+
+    private void Awake()
     {
-        Rigidbody.velocity = transform.forward * BulletSpeed;
-        
-        float lifeTime = GameBoundary.Width / BulletSpeed;
-        Destroy(gameObject, lifeTime);
+        _rigidbody = GetComponent<Rigidbody>();
+
+        _lifeTime = GameBoundary.Width / BulletSpeed;
+        _rigidbody.velocity = transform.forward * BulletSpeed;
+
+        Free = true;
+        gameObject.SetActive(false);
+    }
+
+    public virtual void Create(Vector3 position, Quaternion rotation)
+    {
+        gameObject.SetActive(true);
+
+        Free = false;
+
+        transform.position = position;
+        transform.rotation = rotation;
+
+        _rigidbody.velocity = transform.forward * BulletSpeed;
+
+        Invoke(nameof(DestroyBullet), _lifeTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,8 +47,10 @@ public class Bullet : MonoBehaviour
     private void DestroyBullet()
     {
         //Instantiate(EffectPrefab, transform.position, Quaternion.identity);
-
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        Free = true;
     }
+
+    public void SetNextPool(ObjectPool pool) { }
 }
 

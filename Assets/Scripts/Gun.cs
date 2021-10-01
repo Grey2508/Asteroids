@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public Transform Spawn;
-    public GameObject BulletPrefab;
-    public float ShotDelay;
+    [SerializeField] private Transform Spawn;
+    [SerializeField] private ObjectPool BulletPool;
+    [SerializeField] private float ShotDelay;
 
     private float _nextShot;
 
@@ -14,9 +14,10 @@ public class Gun : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && Time.time > _nextShot)
         {
-            Instantiate(BulletPrefab, Spawn.position, Spawn.rotation);
+            Bullet newBullet = BulletPool.GetNextObject() as Bullet;
+            newBullet.Create(Spawn.position, Spawn.rotation);
+
             _nextShot = Time.time + ShotDelay;
         }
     }
-
 }

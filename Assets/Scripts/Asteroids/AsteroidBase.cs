@@ -12,13 +12,16 @@ public class AsteroidBase : MonoBehaviour, IPoolable
 
     public bool Free { get; set; }
     public ObjectPool NextPool { get; set; }
-    private void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-
+        
+        Free = true;
+        gameObject.SetActive(false);
     }
     public virtual void Create(Vector3 position, Quaternion rotation)
     {
+        Free = false;
         gameObject.SetActive(true);
 
         transform.position = position;
@@ -36,7 +39,7 @@ public class AsteroidBase : MonoBehaviour, IPoolable
         Free = true;
     }
 
-    public void SetAsteroidPool(ObjectPool pool)
+    public void SetNextPool(ObjectPool pool)
     {
         NextPool = pool;
     }

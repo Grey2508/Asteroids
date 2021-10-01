@@ -8,4 +8,10 @@ public class SmallAsteroid : AsteroidBase
 
         _rigidbody.velocity = transform.up * Random.Range(MinSpeed, MaxSpeed);
     }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("GameBoundary"))
+            return;
+    }
 }

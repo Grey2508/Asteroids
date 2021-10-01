@@ -4,5 +4,5 @@ public interface IPoolable
 
     ObjectPool NextPool { get;}
 
-    void SetAsteroidPool(ObjectPool pool);
+    void SetNextPool(ObjectPool pool);
 }
