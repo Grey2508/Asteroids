@@ -46,8 +46,12 @@ public class EnemyMove : MonoBehaviour
             yield return null;
         }
 
-        Invoke(nameof(StartMove), Random.Range(MinDelay, MaxDelay + 1));
-
+        Respawn();
         gameObject.SetActive(false);
+    }
+
+    public void Respawn()
+    {
+        Invoke(nameof(StartMove), Random.Range(MinDelay, MaxDelay + 1));
     }
 }

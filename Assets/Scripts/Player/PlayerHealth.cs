@@ -34,18 +34,14 @@ public class PlayerHealth : MonoBehaviour, IBlinked
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_invulnerable || other.tag == "GameBoundary")
+        if (_invulnerable || other.CompareTag("GameBoundary"))
             return;
 
         Health--;
 
         //HealthUI.DisplayHealth(Health);
 
-        if (Health <= 0)
-        {
-            Health = 0;
-            Die();
-        }
+        
 
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.velocity = Vector3.zero;
@@ -55,6 +51,12 @@ public class PlayerHealth : MonoBehaviour, IBlinked
 
         DeathEffect.transform.position = transform.position;
         DeathEffect.Play();
+
+        if (Health <= 0)
+        {
+            Health = 0;
+            Die();
+        }
 
         Invoke(nameof(Respawn), SpawnDelay);
 
@@ -82,9 +84,6 @@ public class PlayerHealth : MonoBehaviour, IBlinked
 
     private void Die()
     {
-
-
-
         //EventOnDie.Invoke();
 
         Debug.Log("You lose");
