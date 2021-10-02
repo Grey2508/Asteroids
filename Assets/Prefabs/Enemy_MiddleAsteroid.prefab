@@ -130,4 +130,5 @@ MonoBehaviour:
   MinSpeed: 50
   MaxSpeed: 90
   DeflectionAngle: 45
+  Price: 50
   AsteroidExplosion: {fileID: 0}

@@ -6,6 +6,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int Health = 1;
     [SerializeField] private ParticleSystem DeathEffect;
 
+    [SerializeField] private int Price;
+
+
     [SerializeField] private UnityEvent EventOnTakeDamage;
     [SerializeField] private UnityEvent EventOnDie;
 
@@ -30,6 +33,8 @@ public class EnemyHealth : MonoBehaviour
         EventOnDie.Invoke();
 
         gameObject.SetActive(false);
+
+        Score.AddScore(Price);
 
         DeathEffect.transform.position = transform.position;
         DeathEffect.Play();

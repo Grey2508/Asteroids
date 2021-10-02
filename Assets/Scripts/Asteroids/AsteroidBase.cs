@@ -7,6 +7,8 @@ public class AsteroidBase : MonoBehaviour, IPoolable
     [SerializeField] protected float MaxSpeed;
     [SerializeField] protected float DeflectionAngle;
 
+    [SerializeField] private int Price;
+
     [SerializeField] private GameObject AsteroidExplosion;
 
     protected Rigidbody _rigidbody;
@@ -42,6 +44,7 @@ public class AsteroidBase : MonoBehaviour, IPoolable
             return;
 
         MonitorAsteroids.CountAsteroids--;
+        Score.AddScore(Price);
 
         //Instantiate(AsteroidExplosion, transform.position, Quaternion.identity);
         gameObject.SetActive(false);

@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour, IBlinked
     //public AudioSource TakeDamageSound;
     //public PitchAndPlay AddHealthSound;
 
-    //public HealthUI HealthUI;
+    public HealthUI HealthUI;
 
     //public DamageScreen DamageScreen;
     [SerializeField] private Blink Blink;
@@ -29,6 +29,9 @@ public class PlayerHealth : MonoBehaviour, IBlinked
 
     private void Start()
     {
+        HealthUI.Setup(MaxHealth);
+        HealthUI.DisplayHealth(Health);
+
         Respawn();
     }
 
@@ -39,9 +42,7 @@ public class PlayerHealth : MonoBehaviour, IBlinked
 
         Health--;
 
-        //HealthUI.DisplayHealth(Health);
-
-        
+        HealthUI.DisplayHealth(Health);
 
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.velocity = Vector3.zero;
@@ -56,6 +57,8 @@ public class PlayerHealth : MonoBehaviour, IBlinked
         {
             Health = 0;
             Die();
+
+            return;
         }
 
         Invoke(nameof(Respawn), SpawnDelay);
@@ -72,7 +75,7 @@ public class PlayerHealth : MonoBehaviour, IBlinked
     {
         Health += healthValue;
 
-        //HealthUI.DisplayHealth(Health);
+        HealthUI.DisplayHealth(Health);
 
         //AddHealthSound.Play();
 
