@@ -22,6 +22,8 @@ public class AsteroidBase : MonoBehaviour, IPoolable
     }
     public virtual void Create(Vector3 position, Quaternion rotation)
     {
+        MonitorAsteroids.CountAsteroids++;
+
         Free = false;
         gameObject.SetActive(true);
 
@@ -30,6 +32,8 @@ public class AsteroidBase : MonoBehaviour, IPoolable
 
         if (_rigidbody == null)
             _rigidbody = GetComponent<Rigidbody>();
+
+        _rigidbody.angularVelocity = Random.insideUnitSphere * AngularSpeed;
     }
 
     public virtual void OnTriggerEnter(Collider other)
@@ -37,12 +41,14 @@ public class AsteroidBase : MonoBehaviour, IPoolable
         if (other.CompareTag("GameBoundary"))
             return;
 
+        MonitorAsteroids.CountAsteroids--;
+
         //Instantiate(AsteroidExplosion, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
 
         Free = true;
 
-        if (NextPool != null && other.attachedRigidbody.GetComponent<Bullet>())
+        if (NextPool != null && other.attachedRigidbody?.GetComponent<Bullet>())
             CutAsteroid();
 
     }

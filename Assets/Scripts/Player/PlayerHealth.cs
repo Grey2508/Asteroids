@@ -47,7 +47,7 @@ public class PlayerHealth : MonoBehaviour, IBlinked
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
         
-        Ship.SetActive(false);
+        gameObject.SetActive(false);
 
         DeathEffect.transform.position = transform.position;
         DeathEffect.Play();
@@ -96,7 +96,7 @@ public class PlayerHealth : MonoBehaviour, IBlinked
 
     private void Respawn()
     {
-        Ship.SetActive(true);
+        gameObject.SetActive(true);
 
         transform.position = Vector3.zero;
 

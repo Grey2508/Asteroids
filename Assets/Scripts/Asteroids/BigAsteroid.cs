@@ -6,7 +6,7 @@ public class BigAsteroid : AsteroidBase
     {
         base.Create(position, rotation);
 
-        _rigidbody.angularVelocity = Random.insideUnitSphere * AngularSpeed;
+        _rigidbody.velocity = Random.insideUnitCircle * Random.Range(MinSpeed, MaxSpeed);
     }
 
     public override void OnTriggerEnter(Collider other)

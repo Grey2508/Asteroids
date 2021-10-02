@@ -129,5 +129,5 @@ MonoBehaviour:
   AngularSpeed: 70
   MinSpeed: 50
   MaxSpeed: 90
-  DeflectionAngle: 0
+  DeflectionAngle: 45
   AsteroidExplosion: {fileID: 0}

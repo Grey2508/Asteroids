@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a112de8683e1f35438ed84c3759fcd75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AngularSpeed: 70
+  AngularSpeed: 25
   MinSpeed: 40
   MaxSpeed: 80
-  DeflectionAngle: 0
+  DeflectionAngle: 45
   AsteroidExplosion: {fileID: 0}
