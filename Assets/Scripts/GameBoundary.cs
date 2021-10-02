@@ -8,9 +8,16 @@ public class GameBoundary : MonoBehaviour
         private set;
     }
 
+    public static float Height
+    {
+        get;
+        private set;
+    }
+
     private void Awake ()
     {
         Width = transform.localScale.x;
+        Height = transform.localScale.y;
     }
 
     private void OnTriggerExit(Collider other)

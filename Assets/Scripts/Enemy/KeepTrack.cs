@@ -9,6 +9,6 @@ public class KeepTrack : MonoBehaviour
     void Update()
     {
         Vector3 toTarget = Target.position - transform.position;
-        transform.rotation = Quaternion.LookRotation(toTarget, Vector3.forward);
+        transform.rotation = Quaternion.LookRotation(toTarget, new Vector3(0, 1, 1));
     }
 }

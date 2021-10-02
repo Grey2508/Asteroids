@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 167624701}
   - component: {fileID: 167624700}
   - component: {fileID: 167624702}
+  - component: {fileID: 167624704}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -224,6 +225,19 @@ MonoBehaviour:
   EngineFire: {fileID: 1060214828339259217}
   MaxAngularVelocity: 2
   TorqueSpeed: 0.5
+--- !u!135 &167624704
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167624698}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 6.13
+  m_Center: {x: 0, y: 0, z: -0.51}
 --- !u!54 &167624705
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -780,7 +794,7 @@ SphereCollider:
   m_GameObject: {fileID: 1293772906}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 6.13
   m_Center: {x: 0, y: 0, z: -0.51}
@@ -966,10 +980,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1795387713}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1122,7 +1136,7 @@ GameObject:
   - component: {fileID: 2140225326}
   - component: {fileID: 2140225325}
   - component: {fileID: 2140225327}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy_Fly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1173,6 +1187,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acef13a4a1b384844bb74ff39e2c62df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MinDelay: 20
+  MaxDelay: 40
+  TimeOnScreen: 10
+  Borders: 0.2
 --- !u!114 &2140225327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1212,7 +1230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4027334054818052}
   - component: {fileID: 65788257725598238}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Collider (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1230,7 +1248,7 @@ GameObject:
   - component: {fileID: 4254831928926580}
   - component: {fileID: 33636700744349052}
   - component: {fileID: 23108581359537728}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FlyingInsects3_Wing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1248,7 +1266,7 @@ GameObject:
   - component: {fileID: 4072593338699094}
   - component: {fileID: 33486109505841020}
   - component: {fileID: 23116109461513890}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FlyingInsects3_Wing4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1266,7 +1284,7 @@ GameObject:
   - component: {fileID: 4501184181107684}
   - component: {fileID: 33059456968290090}
   - component: {fileID: 23864260368412252}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FlyingInsects3_Wing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1284,7 +1302,7 @@ GameObject:
   - component: {fileID: 4993086445343280}
   - component: {fileID: 33090879230492360}
   - component: {fileID: 23583334243929692}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FlyingInsects3_Wing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1303,7 +1321,7 @@ GameObject:
   - component: {fileID: 33584110051425168}
   - component: {fileID: 23402521202716254}
   - component: {fileID: 1949752200}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Flying Insect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1660,8 +1678,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.4422107, y: 8.694667, z: 7.599971}
-  m_Center: {x: -1.7488867e-15, y: -0.23387289, z: -0.3730669}
+  m_Size: {x: 2.5886, y: 5.0871058, z: 7.599971}
+  m_Center: {x: 0.030278165, y: -0.6376904, z: -0.37306714}
 --- !u!1 &1060214827471039089
 GameObject:
   m_ObjectHideFlags: 0
