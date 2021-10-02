@@ -5,6 +5,7 @@ public class AsteroidBase : MonoBehaviour, IPoolable
     [SerializeField] protected float AngularSpeed;
     [SerializeField] protected float MinSpeed;
     [SerializeField] protected float MaxSpeed;
+    [SerializeField] protected float DeflectionAngle;
 
     [SerializeField] private GameObject AsteroidExplosion;
 
@@ -15,7 +16,7 @@ public class AsteroidBase : MonoBehaviour, IPoolable
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        
+
         Free = true;
         gameObject.SetActive(false);
     }
@@ -33,10 +34,26 @@ public class AsteroidBase : MonoBehaviour, IPoolable
 
     public virtual void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("GameBoundary"))
+            return;
+
         //Instantiate(AsteroidExplosion, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
 
         Free = true;
+
+        if (NextPool != null && other.attachedRigidbody.GetComponent<Bullet>())
+            CutAsteroid();
+
+    }
+
+    protected void CutAsteroid()
+    {
+        AsteroidBase newAsteroid = NextPool.GetNextObject() as AsteroidBase;
+        newAsteroid.Create(transform.position, Quaternion.Euler(_rigidbody.velocity.normalized + new Vector3(0, 0, DeflectionAngle)));
+
+        newAsteroid = NextPool.GetNextObject() as AsteroidBase;
+        newAsteroid.Create(transform.position, Quaternion.Euler(_rigidbody.velocity.normalized + new Vector3(0, 0, -DeflectionAngle)));
     }
 
     public void SetNextPool(ObjectPool pool)

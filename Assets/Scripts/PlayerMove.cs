@@ -2,15 +2,15 @@
 
 public class PlayerMove : MonoBehaviour
 {
-    public Rigidbody Rigidbody;
+    [SerializeField] private Rigidbody Rigidbody;
 
-    public float MaxSpeed;
-    public float Acceleration;
+    [SerializeField] private float MaxSpeed;
+    [SerializeField] private float Acceleration;
 
-    public GameObject EngineFire;
+    [SerializeField] private GameObject EngineFire;
 
-    public float MaxAngularVelocity;
-    public float TorqueSpeed;
+    [SerializeField] private float MaxAngularVelocity;
+    [SerializeField] private float TorqueSpeed;
 
     private float _power;
     private float _torque;
@@ -42,8 +42,6 @@ public class PlayerMove : MonoBehaviour
         Rigidbody.velocity = newVelocity;
 
         Rigidbody.AddRelativeTorque(0, 0, _torque, ForceMode.VelocityChange);
-
-        //Sound.pitch = 0.5f + powerLevel;
     }
 
     private void OnEnable()

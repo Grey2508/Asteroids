@@ -11,7 +11,6 @@ public class SmallAsteroid : AsteroidBase
 
     public override void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("GameBoundary"))
-            return;
+        base.OnTriggerEnter(other);
     }
 }

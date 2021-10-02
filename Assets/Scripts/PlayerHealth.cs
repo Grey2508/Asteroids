@@ -5,11 +5,11 @@ using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour, IBlinked
 {
-    public int Health = 2;
-    public int MaxHealth = 5;
+    [SerializeField] private int Health = 2;
+    [SerializeField] private int MaxHealth = 5;
 
-    public float InvulnerableTime = 3;
-    public float SpawnDelay = 2;
+    [SerializeField] private float InvulnerableTime = 3;
+    [SerializeField] private float SpawnDelay = 2;
 
     //public AudioSource TakeDamageSound;
     //public PitchAndPlay AddHealthSound;
@@ -17,10 +17,10 @@ public class PlayerHealth : MonoBehaviour, IBlinked
     //public HealthUI HealthUI;
 
     //public DamageScreen DamageScreen;
-    public Blink Blink;
-    public GameObject Ship;
+    [SerializeField] private Blink Blink;
+    [SerializeField] private GameObject Ship;
 
-    public ParticleSystem DeathEffect;
+    [SerializeField] private ParticleSystem DeathEffect;
 
     //public UnityEvent EventOnTakeDamage;
     //public UnityEvent EventOnDie;
