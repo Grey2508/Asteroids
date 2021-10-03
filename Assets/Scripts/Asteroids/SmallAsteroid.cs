@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class SmallAsteroid : AsteroidBase
 {
-    public override void Create(Vector3 position, Quaternion rotation)
+    public override void Create(Vector3 position, Vector3 velocity)
     {
-        base.Create(position, rotation);
+        base.Create(position, velocity);
 
-        _rigidbody.velocity = transform.up * Random.Range(MinSpeed, MaxSpeed);
+        _rigidbody.velocity = velocity.normalized * Random.Range(MinSpeed, MaxSpeed);
     }
 
     public override void OnTriggerEnter(Collider other)

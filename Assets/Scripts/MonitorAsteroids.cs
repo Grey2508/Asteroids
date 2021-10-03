@@ -39,6 +39,6 @@ public class MonitorAsteroids : MonoBehaviour
 
         BigAsteroid newAsteroid = AsteroidsPool.GetNextObject() as BigAsteroid;
 
-        newAsteroid.Create(SpawnPoint, Quaternion.identity);
+        newAsteroid.Create(SpawnPoint, Vector3.zero);
     }
 }

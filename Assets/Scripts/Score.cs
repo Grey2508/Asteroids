@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
     [SerializeField] private int ScoreForLife = 1000;
+    [SerializeField] private PlayerHealth PlayerHealth;
 
     static int TotalScore;
     static Text ScoreText;
+    static int StaticScoreForLife;
+    static PlayerHealth StaticPlayerHealth;
 
     void Start()
     {
         ScoreText = GetComponent<Text>();
+        StaticScoreForLife = ScoreForLife;
+        StaticPlayerHealth = PlayerHealth;
     }
 
     public static void AddScore(int value)
@@ -20,6 +23,15 @@ public class Score : MonoBehaviour
         TotalScore += value;
 
         ScoreText.text = TotalScore.ToString();
-        //if(TotalScore%score)
+
+        if (TotalScore % StaticScoreForLife == 0)
+            StaticPlayerHealth.AddHealth(1);
+    }
+
+    public static void Reset()
+    {
+        TotalScore = 0;
+
+        ScoreText.text = TotalScore.ToString();
     }
 }

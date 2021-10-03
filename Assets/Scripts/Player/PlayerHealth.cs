@@ -14,16 +14,14 @@ public class PlayerHealth : MonoBehaviour, IBlinked
     //public AudioSource TakeDamageSound;
     //public PitchAndPlay AddHealthSound;
 
-    public HealthUI HealthUI;
+    [SerializeField] private HealthUI HealthUI;
 
-    //public DamageScreen DamageScreen;
     [SerializeField] private Blink Blink;
     [SerializeField] private GameObject Ship;
 
     [SerializeField] private ParticleSystem DeathEffect;
 
-    //public UnityEvent EventOnTakeDamage;
-    //public UnityEvent EventOnDie;
+    private int _defaultHealth;
 
     private bool _invulnerable = false; //неуязвимость
 
@@ -31,7 +29,7 @@ public class PlayerHealth : MonoBehaviour, IBlinked
     {
         HealthUI.Setup(MaxHealth);
         HealthUI.DisplayHealth(Health);
-
+        _defaultHealth = Health;
         Respawn();
     }
 

@@ -22,7 +22,7 @@ public class AsteroidBase : MonoBehaviour, IPoolable
         Free = true;
         gameObject.SetActive(false);
     }
-    public virtual void Create(Vector3 position, Quaternion rotation)
+    public virtual void Create(Vector3 position, Vector3 velocity)
     {
         MonitorAsteroids.CountAsteroids++;
 
@@ -30,7 +30,6 @@ public class AsteroidBase : MonoBehaviour, IPoolable
         gameObject.SetActive(true);
 
         transform.position = position;
-        transform.rotation = rotation;
 
         if (_rigidbody == null)
             _rigidbody = GetComponent<Rigidbody>();
@@ -53,16 +52,26 @@ public class AsteroidBase : MonoBehaviour, IPoolable
 
         if (NextPool != null && other.attachedRigidbody?.GetComponent<Bullet>())
             CutAsteroid();
-
     }
 
     protected void CutAsteroid()
     {
         AsteroidBase newAsteroid = NextPool.GetNextObject() as AsteroidBase;
-        newAsteroid.Create(transform.position, Quaternion.Euler(_rigidbody.velocity.normalized + new Vector3(0, 0, DeflectionAngle)));
+
+        float x = _rigidbody.velocity.x * Mathf.Cos(DeflectionAngle) - _rigidbody.velocity.y * Mathf.Sin(DeflectionAngle);
+        float y = _rigidbody.velocity.x * Mathf.Sin(DeflectionAngle) + _rigidbody.velocity.y * Mathf.Cos(DeflectionAngle);
+
+        Vector3 newVelocity = new Vector3(x, y, 0);
+
+        newAsteroid.Create(transform.position, newVelocity);
 
         newAsteroid = NextPool.GetNextObject() as AsteroidBase;
-        newAsteroid.Create(transform.position, Quaternion.Euler(_rigidbody.velocity.normalized + new Vector3(0, 0, -DeflectionAngle)));
+        x = _rigidbody.velocity.x * Mathf.Cos(-DeflectionAngle) - _rigidbody.velocity.y * Mathf.Sin(-DeflectionAngle);
+        y = _rigidbody.velocity.x * Mathf.Sin(-DeflectionAngle) + _rigidbody.velocity.y * Mathf.Cos(-DeflectionAngle);
+
+        newVelocity = new Vector3(x, y, 0);
+
+        newAsteroid.Create(transform.position, newVelocity);
     }
 
     public void SetNextPool(ObjectPool pool)
