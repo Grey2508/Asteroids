@@ -36,4 +36,15 @@ public class ObjectPool : MonoBehaviour
             }
         }
     }
+
+    public void Restart()
+    {
+        foreach(IPoolable item in _objects)
+        {
+            item.Free = true;
+            item.SetActive(false);
+        }
+
+        _currentIndex = 0;
+    }
 }

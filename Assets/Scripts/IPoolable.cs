@@ -5,4 +5,6 @@ public interface IPoolable
     ObjectPool NextPool { get;}
 
     void SetNextPool(ObjectPool pool);
+
+    void SetActive(bool value);
 }

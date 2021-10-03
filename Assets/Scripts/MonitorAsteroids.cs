@@ -8,6 +8,13 @@ public class MonitorAsteroids : MonoBehaviour
     [SerializeField] private ObjectPool AsteroidsPool;
     public static int CountAsteroids;
 
+    private int _defaultStartCountAsteroids;
+
+    private void Start()
+    {
+        _defaultStartCountAsteroids = StartCountAsteroids;
+    }
+
     private void Update()
     {
         if (CountAsteroids > 0)
@@ -40,5 +47,11 @@ public class MonitorAsteroids : MonoBehaviour
         BigAsteroid newAsteroid = AsteroidsPool.GetNextObject() as BigAsteroid;
 
         newAsteroid.Create(SpawnPoint, Vector3.zero);
+    }
+
+    public void Restart()
+    {
+        CountAsteroids = 0;
+        StartCountAsteroids = _defaultStartCountAsteroids;
     }
 }

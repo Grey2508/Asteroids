@@ -52,5 +52,9 @@ public class Bullet : MonoBehaviour, IPoolable
     }
 
     public void SetNextPool(ObjectPool pool) { }
-}
 
+    public void SetActive(bool value)
+    {
+        gameObject.SetActive(value);
+    }
+}

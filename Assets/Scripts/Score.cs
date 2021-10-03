@@ -28,7 +28,7 @@ public class Score : MonoBehaviour
             StaticPlayerHealth.AddHealth(1);
     }
 
-    public static void Reset()
+    public void Restart()
     {
         TotalScore = 0;
 

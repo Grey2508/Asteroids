@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 167624704}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,8 +333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573c9b0f309124f4497ffaa45a308c1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 5
-  MaxHealth: 8
+  Health: 25
+  MaxHealth: 5
   InvulnerableTime: 3
   SpawnDelay: 2
   HealthUI: {fileID: 792236032}
@@ -419,7 +419,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237094527}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
@@ -429,10 +429,10 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &237094530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartCountAsteroids: 2
-  CheckSphereRadius: 5
+  CheckSphereRadius: 40
   AsteroidsPool: {fileID: 1726471152}
 --- !u!1 &705507993
 GameObject:
@@ -1251,7 +1251,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 853825882}
   m_OnClick:
     m_PersistentCalls:
@@ -1690,11 +1690,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 805c8609d11b2d14bb789a3d1bd26040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScriptsForOff:
-  - {fileID: 167624700}
+  ScriptsForPause:
   - {fileID: 167624703}
+  - {fileID: 167624700}
+  ScriptsForRestart:
+  - {fileID: 1726471152}
+  - {fileID: 1931653295}
+  - {fileID: 903965385}
+  - {fileID: 1355114914}
+  - {fileID: 256256809}
+  - {fileID: 1731392269}
+  - {fileID: 167624702}
+  - {fileID: 2140225326}
+  - {fileID: 644861161}
   PlayerMove: {fileID: 167624703}
   MenuCanvas: {fileID: 237094527}
+  ContinueBtn: {fileID: 853825881}
 --- !u!1 &1355114913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,6 +2007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreForLife: 1000
+  PlayerHealth: {fileID: 167624702}
 --- !u!1001 &1771421332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2310,7 +2322,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1811517720}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1312502320}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: NewGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1811517720
 MonoBehaviour:
   m_ObjectHideFlags: 0

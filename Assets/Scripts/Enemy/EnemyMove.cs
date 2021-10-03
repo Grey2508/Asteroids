@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
@@ -52,6 +51,13 @@ public class EnemyMove : MonoBehaviour
 
     public void Respawn()
     {
-        Invoke(nameof(StartMove), Random.Range(MinDelay, MaxDelay + 1));
+        Invoke(nameof(StartMove), Random.Range(MinDelay, MaxDelay));
+    }
+
+    public void Restart()
+    {
+        Respawn();
+
+        gameObject.SetActive(false);
     }
 }

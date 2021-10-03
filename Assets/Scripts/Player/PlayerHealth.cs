@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour, IBlinked
         HealthUI.Setup(MaxHealth);
         HealthUI.DisplayHealth(Health);
         _defaultHealth = Health;
+
         Respawn();
     }
 
@@ -115,5 +116,13 @@ public class PlayerHealth : MonoBehaviour, IBlinked
     public void Hide()
     {
         Ship.SetActive(false);
+    }
+
+    public void Restart()
+    {
+        Health = _defaultHealth;
+        HealthUI.DisplayHealth(Health);
+
+        Respawn();
     }
 }

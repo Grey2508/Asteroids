@@ -22,19 +22,21 @@ public class EnemyHealth : MonoBehaviour
         if (Health <= 0)
         {
             Health = 0;
-            Die();
+
+            Die(other.CompareTag("Player"));
         }
 
         EventOnTakeDamage.Invoke();
     }
 
-    private void Die()
+    private void Die(bool addScore)
     {
         EventOnDie.Invoke();
 
         gameObject.SetActive(false);
 
-        Score.AddScore(Price);
+        if (addScore)
+            Score.AddScore(Price);
 
         DeathEffect.transform.position = transform.position;
         DeathEffect.Play();

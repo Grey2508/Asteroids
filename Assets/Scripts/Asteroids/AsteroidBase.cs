@@ -15,6 +15,7 @@ public class AsteroidBase : MonoBehaviour, IPoolable
 
     public bool Free { get; set; }
     public ObjectPool NextPool { get; set; }
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -43,7 +44,9 @@ public class AsteroidBase : MonoBehaviour, IPoolable
             return;
 
         MonitorAsteroids.CountAsteroids--;
-        Score.AddScore(Price);
+
+        if (other.CompareTag("Player"))
+            Score.AddScore(Price);
 
         //Instantiate(AsteroidExplosion, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
@@ -77,5 +80,10 @@ public class AsteroidBase : MonoBehaviour, IPoolable
     public void SetNextPool(ObjectPool pool)
     {
         NextPool = pool;
+    }
+
+    public void SetActive(bool value)
+    {
+        gameObject.SetActive(value);
     }
 }
