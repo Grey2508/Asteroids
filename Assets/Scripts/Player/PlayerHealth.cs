@@ -43,10 +43,6 @@ public class PlayerHealth : MonoBehaviour, IBlinked
 
         HealthUI.DisplayHealth(Health);
 
-        Rigidbody rigidbody = GetComponent<Rigidbody>();
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.angularVelocity = Vector3.zero;
-        
         gameObject.SetActive(false);
 
         DeathEffect.transform.position = transform.position;
@@ -98,10 +94,14 @@ public class PlayerHealth : MonoBehaviour, IBlinked
 
     private void Respawn()
     {
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
+
         gameObject.SetActive(true);
 
         transform.position = Vector3.zero;
-
+        
         _invulnerable = true;
         Invoke(nameof(StopInvulnerable), InvulnerableTime);
 

@@ -2,8 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ControlType
+{
+    Keyboard,
+    Mouse
+}
+
 public class Menu : MonoBehaviour
 {
+    public static ControlType CurrentControlType;
+
     [SerializeField] private List<MonoBehaviour> ScriptsForPause;
 
     [SerializeField] private List<MonoBehaviour> ScriptsForRestart;
@@ -12,15 +20,18 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject MenuCanvas;
 
     [SerializeField] private Button ContinueBtn;
+    [SerializeField] private Text ControlCaption;
 
     private void Start()
     {
         Pause();
+
+        CurrentControlType = ControlType.Keyboard;
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             ContinueBtn.interactable = true;
 
@@ -45,7 +56,7 @@ public class Menu : MonoBehaviour
 
     public void ContinueGame()
     {
-        for(int i=0; i<ScriptsForPause.Count; i++)
+        for (int i = 0; i < ScriptsForPause.Count; i++)
             ScriptsForPause[i].enabled = true;
 
         MenuCanvas.SetActive(false);
@@ -59,5 +70,19 @@ public class Menu : MonoBehaviour
             item.Invoke("Restart", 0);
 
         ContinueGame();
+    }
+
+    public void ChangeControl()
+    {
+        if (CurrentControlType == ControlType.Keyboard)
+        {
+            CurrentControlType = ControlType.Mouse;
+            ControlCaption.text = "”правление: клавиатура + мышь";
+        }
+        else
+        {
+            CurrentControlType = ControlType.Keyboard;
+            ControlCaption.text = "”правление: клавиатура";
+        }
     }
 }

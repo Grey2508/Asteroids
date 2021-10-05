@@ -285,7 +285,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167624698}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -293,7 +293,7 @@ Transform:
   - {fileID: 1293772907}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &167624700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +309,8 @@ MonoBehaviour:
   Spawn: {fileID: 1060214827725515181}
   BulletPool: {fileID: 1355114914}
   ShotDelay: 0.33333334
+  FireKeyboard: 32
+  FireMouse: 323
 --- !u!114 &167624701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573c9b0f309124f4497ffaa45a308c1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 25
+  Health: 2
   MaxHealth: 5
   InvulnerableTime: 3
   SpawnDelay: 2
@@ -359,6 +361,9 @@ MonoBehaviour:
   EngineFire: {fileID: 1060214828339259217}
   MaxAngularVelocity: 2
   TorqueSpeed: 0.5
+  RotationSpeed: 120
+  Camera: {fileID: 963194227}
+  PowerMouse: 324
 --- !u!135 &167624704
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -386,7 +391,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 56
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!198 &185508742 stripped
 ParticleSystem:
@@ -737,8 +742,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435: \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0430
-    + \u043C\u044B\u0448\u044C"
+  m_Text: "\u0423\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435: \u043A\u043B\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u0430"
 --- !u!222 &350958571
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -899,7 +903,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &644861160
 Transform:
   m_ObjectHideFlags: 0
@@ -1624,15 +1628,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293772906}
-  m_LocalRotation: {x: -0.70710677, y: -0.000000059604638, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 9.094949e-13, y: -0.0000080468835, z: -0.000008046567}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1060214828486574036}
   - {fileID: 1060214828339259220}
   m_Father: {fileID: 167624699}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!135 &1293772908
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1706,6 +1710,7 @@ MonoBehaviour:
   PlayerMove: {fileID: 167624703}
   MenuCanvas: {fileID: 237094527}
   ContinueBtn: {fileID: 853825881}
+  ControlCaption: {fileID: 350958570}
 --- !u!1 &1355114913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,6 +2092,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerExplosion
       objectReference: {fileID: 0}
+    - target: {fileID: 8000640389873733251, guid: 1d5393b98e08e8e429d67caf1604c610, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d5393b98e08e8e429d67caf1604c610, type: 3}
 --- !u!1 &1795387712
@@ -2201,7 +2210,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1806828462}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1312502320}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: ChangeControl
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1806828462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2666,6 +2687,10 @@ PrefabInstance:
     - target: {fileID: 8000640389873733251, guid: 1d5393b98e08e8e429d67caf1604c610, type: 3}
       propertyPath: m_Name
       value: EnemyExplosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000640389873733251, guid: 1d5393b98e08e8e429d67caf1604c610, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d5393b98e08e8e429d67caf1604c610, type: 3}
@@ -12984,7 +13009,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060214827725515180}
-  m_LocalRotation: {x: -0.70710677, y: -0.000000059604638, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.70710695, y: -0.000000029802322, z: 0.00000008940697, w: 0.7071067}
   m_LocalPosition: {x: -0.04, y: 5.63, z: -0.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
