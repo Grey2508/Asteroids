@@ -20,8 +20,6 @@ public class PlayerMove : MonoBehaviour
     private float _power;
     private float _torque;
 
-    //public AudioSource Sound;
-
     private void Start()
     {
         Rigidbody.maxAngularVelocity = MaxAngularVelocity;
@@ -44,7 +42,7 @@ public class PlayerMove : MonoBehaviour
 
         if (Menu.CurrentControlType == ControlType.Keyboard)
         {
-            _torque = Input.GetAxis("Horizontal") * -TorqueSpeed;
+            _torque = Input.GetAxis("Horizontal") * TorqueSpeed;
 
             Rigidbody.AddRelativeTorque(_torque, 0, 0, ForceMode.VelocityChange);
         }
@@ -60,30 +58,19 @@ public class PlayerMove : MonoBehaviour
 
     private void RotateWithMouse()
     {
-        //создание луча в позицию курсора
         Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
 
-        //создание плоскости
         Plane plane = new Plane(Vector3.back, Vector3.zero);
 
-        //Получение точки пересечения плоскости и луча
         plane.Raycast(ray, out float distance);
+
         Vector3 point = ray.GetPoint(distance);
 
-        //вычисление вектора направления к прицелу
         Vector3 toPoint = point - transform.position;
 
-        //Quaternion targetRotation = Quaternion.LookRotation(toPoint, transform.up);
         Quaternion targetRotation = Quaternion.Euler(-Vector3.SignedAngle(Vector3.up, toPoint, Vector3.forward), 90, 0);
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
 
-        //Vector3.SignedAngle(Vector3.up, toPoint, Vector3.up);
-        
-
-        ////поворот оружия
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(toPoint, Vector3.up), RotationSpeed * Time.deltaTime);
-
-        //transform.rotation = Quaternion.FromToRotation(transform.rotation.eulerAngles, toPoint);
     }
 }

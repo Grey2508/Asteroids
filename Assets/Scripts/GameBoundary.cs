@@ -14,7 +14,7 @@ public class GameBoundary : MonoBehaviour
         private set;
     }
 
-    private void Awake ()
+    private void Awake()
     {
         Width = transform.localScale.x;
         Height = transform.localScale.y;
@@ -22,11 +22,16 @@ public class GameBoundary : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Vector3 contactPoint = other.transform.position;
+        Move(other.attachedRigidbody.transform);
+    }
 
-        int signX = (Mathf.Abs(contactPoint.x) > (transform.localScale.x / 2) ? -1 : 1);
-        int signY = (Mathf.Abs(contactPoint.y) > (transform.localScale.y / 2) ? -1 : 1);
+    public static void Move(Transform transform)
+    {
+        Vector3 contactPoint = transform.position;
 
-        other.attachedRigidbody.transform.position = new Vector3(contactPoint.x * signX, contactPoint.y * signY, 0);
+        int signX = (Mathf.Abs(contactPoint.x) >= (Width / 2) ? -1 : 1);
+        int signY = (Mathf.Abs(contactPoint.y) >= (Height / 2) ? -1 : 1);
+
+        transform.position = new Vector3(contactPoint.x * signX, contactPoint.y * signY, 0);
     }
 }

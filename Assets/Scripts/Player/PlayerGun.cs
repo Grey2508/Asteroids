@@ -9,6 +9,8 @@ public class PlayerGun : MonoBehaviour
     [SerializeField] private KeyCode FireKeyboard = KeyCode.Space;
     [SerializeField] private KeyCode FireMouse = KeyCode.Mouse0;
 
+    [SerializeField] private PitchAndPlay ShotSound;
+
     private float _nextShot;
 
     void  Update()
@@ -21,6 +23,7 @@ public class PlayerGun : MonoBehaviour
             newBullet.Create(Spawn.position, Spawn.rotation);
 
             _nextShot = Time.time + ShotDelay;
+            ShotSound.Play();
         }
     }
 }

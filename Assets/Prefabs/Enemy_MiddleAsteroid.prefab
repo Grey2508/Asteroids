@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2037455401912578687}
   - component: {fileID: 2045210932478425073}
   - component: {fileID: 413433029139603847}
-  - component: {fileID: 2853736640287193736}
   - component: {fileID: 4139151556355423630}
+  - component: {fileID: 4429016598959454623}
   m_Layer: 8
   m_Name: Enemy_MiddleAsteroid
   m_TagString: Untagged
@@ -101,19 +101,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 1
---- !u!65 &2853736640287193736
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033042694546160817}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 5, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4139151556355423630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,3 +119,17 @@ MonoBehaviour:
   DeflectionAngle: 45
   Price: 50
   AsteroidExplosion: {fileID: 0}
+--- !u!136 &4429016598959454623
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033042694546160817}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.6462644
+  m_Height: 5.974777
+  m_Direction: 1
+  m_Center: {x: 0.00000017881392, y: 0.0000035762785, z: -0.0000035166738}

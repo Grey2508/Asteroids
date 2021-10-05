@@ -4,18 +4,15 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     [SerializeField] private int ScoreForLife = 1000;
-    [SerializeField] private PlayerHealth PlayerHealth;
 
-    static int TotalScore;
+    public static int TotalScore;
     static Text ScoreText;
     static int StaticScoreForLife;
-    static PlayerHealth StaticPlayerHealth;
 
     void Start()
     {
         ScoreText = GetComponent<Text>();
         StaticScoreForLife = ScoreForLife;
-        StaticPlayerHealth = PlayerHealth;
     }
 
     public static void AddScore(int value)
@@ -25,7 +22,7 @@ public class Score : MonoBehaviour
         ScoreText.text = TotalScore.ToString();
 
         if (TotalScore % StaticScoreForLife == 0)
-            StaticPlayerHealth.AddHealth(1);
+            FindObjectOfType<PlayerHealth>().AddHealth(1);
     }
 
     public void Restart()

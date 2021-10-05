@@ -69,6 +69,8 @@ public class Menu : MonoBehaviour
         foreach (var item in ScriptsForRestart)
             item.Invoke("Restart", 0);
 
+        GameOver.Hide();
+
         ContinueGame();
     }
 

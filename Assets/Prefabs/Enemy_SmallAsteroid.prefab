@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8571885524063836587}
   - component: {fileID: 8561726830193941151}
   - component: {fileID: 8173856108363216119}
-  - component: {fileID: 8803367612970943748}
   - component: {fileID: 1730268121}
+  - component: {fileID: 4474291561504193471}
   m_Layer: 8
   m_Name: Enemy_SmallAsteroid
   m_TagString: Untagged
@@ -101,19 +101,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 1
---- !u!65 &8803367612970943748
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8539012775749660535}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.9, y: 1.8, z: 1.9}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1730268121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,3 +119,16 @@ MonoBehaviour:
   DeflectionAngle: 45
   Price: 100
   AsteroidExplosion: {fileID: 0}
+--- !u!135 &4474291561504193471
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8539012775749660535}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.6057746
+  m_Center: {x: 0, y: 0.000000059604645, z: 0}

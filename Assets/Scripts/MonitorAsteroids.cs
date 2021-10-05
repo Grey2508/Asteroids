@@ -4,11 +4,13 @@ public class MonitorAsteroids : MonoBehaviour
 {
     [SerializeField] private int StartCountAsteroids = 2;
     [SerializeField] private float CheckSphereRadius = 5;
+    [SerializeField] private float DelaySpawn = 2;
 
     [SerializeField] private ObjectPool AsteroidsPool;
     public static int CountAsteroids;
 
     private int _defaultStartCountAsteroids;
+    private bool _startSpawn = true;
 
     private void Start()
     {
@@ -17,15 +19,12 @@ public class MonitorAsteroids : MonoBehaviour
 
     private void Update()
     {
-        if (CountAsteroids > 0)
+        if (CountAsteroids > 0 || _startSpawn)
             return;
 
-        for (int i = 0; i < StartCountAsteroids; i++)
-        {
-            SpawnNewAsteroid();
-        }
+        _startSpawn = true;
 
-        StartCountAsteroids++;
+        Invoke(nameof(StartSpawnAsteroids), DelaySpawn);
     }
 
     private void SpawnNewAsteroid()
@@ -49,9 +48,27 @@ public class MonitorAsteroids : MonoBehaviour
         newAsteroid.Create(SpawnPoint, Vector3.zero);
     }
 
+    private void StartSpawnAsteroids()
+    {
+        for (int i = 0; i < StartCountAsteroids; i++)
+        {
+            SpawnNewAsteroid();
+        }
+
+        StartCountAsteroids++;
+
+        _startSpawn = false;
+    }
+
     public void Restart()
     {
+        CancelInvoke();
+
+        _startSpawn = true;
+
         CountAsteroids = 0;
         StartCountAsteroids = _defaultStartCountAsteroids;
+
+        StartSpawnAsteroids();
     }
 }

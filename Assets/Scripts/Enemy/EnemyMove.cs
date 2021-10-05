@@ -17,7 +17,6 @@ public class EnemyMove : MonoBehaviour
     {
         _bordersValues = GameBoundary.Height / 2 - GameBoundary.Height * Borders;
 
-        Invoke(nameof(StartMove), Random.Range(MinDelay, MaxDelay + 1));
         gameObject.SetActive(false);
     }
 
@@ -56,8 +55,9 @@ public class EnemyMove : MonoBehaviour
 
     public void Restart()
     {
-        Respawn();
+        CancelInvoke();
 
+        Respawn();
         gameObject.SetActive(false);
     }
 }

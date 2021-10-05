@@ -11,15 +11,12 @@ public class PlayerHealth : MonoBehaviour, IBlinked
     [SerializeField] private float InvulnerableTime = 3;
     [SerializeField] private float SpawnDelay = 2;
 
-    //public AudioSource TakeDamageSound;
-    //public PitchAndPlay AddHealthSound;
-
     [SerializeField] private HealthUI HealthUI;
 
     [SerializeField] private Blink Blink;
     [SerializeField] private GameObject Ship;
 
-    [SerializeField] private ParticleSystem DeathEffect;
+    [SerializeField] private GameObject DeathEffect;
 
     private int _defaultHealth;
 
@@ -45,8 +42,8 @@ public class PlayerHealth : MonoBehaviour, IBlinked
 
         gameObject.SetActive(false);
 
+        DeathEffect.SetActive(true);
         DeathEffect.transform.position = transform.position;
-        DeathEffect.Play();
 
         if (Health <= 0)
         {
@@ -57,13 +54,6 @@ public class PlayerHealth : MonoBehaviour, IBlinked
         }
 
         Invoke(nameof(Respawn), SpawnDelay);
-
-
-        //EventOnTakeDamage.Invoke();
-        //DamageScreen.StartEffect();
-        //Blink.StartEffect();
-        //TakeDamageSound.pitch = Random.Range(0.8f, 1.2f);
-        //TakeDamageSound.Play();
     }
 
     public void AddHealth(int healthValue)
@@ -71,8 +61,6 @@ public class PlayerHealth : MonoBehaviour, IBlinked
         Health += healthValue;
 
         HealthUI.DisplayHealth(Health);
-
-        //AddHealthSound.Play();
 
         if (Health > MaxHealth)
         {
@@ -82,9 +70,7 @@ public class PlayerHealth : MonoBehaviour, IBlinked
 
     private void Die()
     {
-        //EventOnDie.Invoke();
-
-        Debug.Log("You lose");
+        GameOver.Show();
     }
 
     private void StopInvulnerable()
@@ -94,6 +80,8 @@ public class PlayerHealth : MonoBehaviour, IBlinked
 
     private void Respawn()
     {
+        DeathEffect.SetActive(false);
+
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;

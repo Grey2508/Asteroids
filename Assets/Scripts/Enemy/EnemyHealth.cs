@@ -8,8 +8,6 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] private int Price;
 
-
-    [SerializeField] private UnityEvent EventOnTakeDamage;
     [SerializeField] private UnityEvent EventOnDie;
 
     private void OnTriggerEnter(Collider other)
@@ -25,8 +23,6 @@ public class EnemyHealth : MonoBehaviour
 
             Die(other.CompareTag("Player"));
         }
-
-        EventOnTakeDamage.Invoke();
     }
 
     private void Die(bool addScore)

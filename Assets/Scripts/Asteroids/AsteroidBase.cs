@@ -32,6 +32,9 @@ public class AsteroidBase : MonoBehaviour, IPoolable
 
         transform.position = position;
 
+        if (Mathf.Abs(position.x) >= GameBoundary.Width / 2 || Mathf.Abs(position.y) >= GameBoundary.Height / 2)
+            GameBoundary.Move(transform);
+
         if (_rigidbody == null)
             _rigidbody = GetComponent<Rigidbody>();
 
