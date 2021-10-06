@@ -46,7 +46,6 @@ public class Bullet : MonoBehaviour, IPoolable
 
     private void DestroyBullet()
     {
-        //Instantiate(EffectPrefab, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
         Free = true;
     }

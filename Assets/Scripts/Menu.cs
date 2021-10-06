@@ -32,11 +32,7 @@ public class Menu : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ContinueBtn.interactable = true;
-
             Pause();
-        }
     }
 
     private void Pause()
@@ -68,6 +64,8 @@ public class Menu : MonoBehaviour
     {
         foreach (var item in ScriptsForRestart)
             item.Invoke("Restart", 0);
+
+        ContinueBtn.interactable = true;
 
         GameOver.Hide();
 

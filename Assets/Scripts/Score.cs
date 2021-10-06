@@ -5,7 +5,12 @@ public class Score : MonoBehaviour
 {
     [SerializeField] private int ScoreForLife = 1000;
 
-    public static int TotalScore;
+    public static int TotalScore
+    {
+        get;
+        private set;
+    }
+
     static Text ScoreText;
     static int StaticScoreForLife;
 

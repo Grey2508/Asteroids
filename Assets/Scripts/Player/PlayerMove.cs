@@ -70,7 +70,7 @@ public class PlayerMove : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.Euler(-Vector3.SignedAngle(Vector3.up, toPoint, Vector3.forward), 90, 0);
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
+        Rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime));
 
     }
 }

@@ -7,9 +7,12 @@ public class Blink : MonoBehaviour
 
     public void StartEffect(float blinkTime, IBlinked blinked = null)
     {
-        StartCoroutine(BlinkEffect(blinkTime));
+        if (blinked == null)
+            return;
 
         _blinkedObject = blinked;
+
+        StartCoroutine(BlinkEffect(blinkTime));
     }
 
     private IEnumerator BlinkEffect(float blinkTime)
@@ -18,14 +21,14 @@ public class Blink : MonoBehaviour
         {
             float value = (float)System.Math.Round(-Mathf.Sin(t * 11) * 0.5f + 0.5f, 2);
 
-            if (value >0.98)
-                _blinkedObject?.Hide();
-            else if (value <0.02)
-                _blinkedObject?.Show();
+            if (value > 0.98)
+                _blinkedObject.Hide();
+            else if (value < 0.02)
+                _blinkedObject.Show();
 
             yield return null;
         }
 
-        _blinkedObject?.Show();
+        _blinkedObject.Show();
     }
 }

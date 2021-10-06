@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
@@ -7,23 +7,27 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private GameObject Prefab;
     [SerializeField] private ObjectPool NextPool;
 
-    private List<IPoolable> _objects = new List<IPoolable>();
+    private IPoolable[] _objects;
     private int _currentIndex = 0;
 
     void Start()
     {
+        _objects = new IPoolable[Count];
+
         for (int i = 0; i < Count; i++)
         {
             GameObject newObject = Instantiate(Prefab, Vector3.zero, Quaternion.identity, transform);
             IPoolable newItem = newObject.GetComponent<IPoolable>();
             newItem.SetNextPool(NextPool);
-            _objects.Add(newItem);
+            _objects[i] = newItem;
         }
     }
 
     public IPoolable GetNextObject()
     {
-        while (true)
+        int counter = 0;
+
+        while (counter++ < 3)
         {
             IPoolable result = _objects[_currentIndex++];
 
@@ -35,11 +39,30 @@ public class ObjectPool : MonoBehaviour
                 return result;
             }
         }
+
+        MultiplyPool();
+
+        return GetNextObject();
+    }
+
+    private void MultiplyPool()
+    {
+        Array.Resize(ref _objects, Count * 2);
+
+        for (int i = Count; i < Count * 2; i++)
+        {
+            GameObject newObject = Instantiate(Prefab, Vector3.zero, Quaternion.identity, transform);
+            IPoolable newItem = newObject.GetComponent<IPoolable>();
+            newItem.SetNextPool(NextPool);
+            _objects[i] = newItem;
+        }
+
+        Count *= 2;
     }
 
     public void Restart()
     {
-        foreach(IPoolable item in _objects)
+        foreach (IPoolable item in _objects)
         {
             item.Free = true;
             item.SetActive(false);
