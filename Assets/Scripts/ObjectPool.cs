@@ -10,17 +10,21 @@ public class ObjectPool : MonoBehaviour
     private IPoolable[] _objects;
     private int _currentIndex = 0;
 
-    void Start()
+    void Awake()
     {
         _objects = new IPoolable[Count];
 
-        for (int i = 0; i < Count; i++)
-        {
-            GameObject newObject = Instantiate(Prefab, Vector3.zero, Quaternion.identity, transform);
-            IPoolable newItem = newObject.GetComponent<IPoolable>();
-            newItem.SetNextPool(NextPool);
-            _objects[i] = newItem;
-        }
+        FillPool(Count);
+
+        //for (int i = 0; i < Count; i++)
+        //{
+        //    GameObject newObject = Instantiate(Prefab, Vector3.zero, Quaternion.identity, transform);
+        //    IPoolable newItem = newObject.GetComponent<IPoolable>();
+        //    newItem.SetNextPool(NextPool);
+        //    newItem.Free = true;
+        //    newItem.SetActive(false);
+        //    _objects[i] = newItem;
+        //}
     }
 
     public IPoolable GetNextObject()
@@ -49,15 +53,30 @@ public class ObjectPool : MonoBehaviour
     {
         Array.Resize(ref _objects, Count * 2);
 
-        for (int i = Count; i < Count * 2; i++)
+        FillPool(Count * 2, Count);
+
+        //for (int i = Count; i < Count * 2; i++)
+        //{
+        //    GameObject newObject = Instantiate(Prefab, Vector3.zero, Quaternion.identity, transform);
+        //    IPoolable newItem = newObject.GetComponent<IPoolable>();
+        //    newItem.SetNextPool(NextPool);
+        //    _objects[i] = newItem;
+        //}
+
+        Count *= 2;
+    }
+
+    private void FillPool(int count, int startIndex = 0)
+    {
+        for (int i = startIndex; i < count; i++)
         {
             GameObject newObject = Instantiate(Prefab, Vector3.zero, Quaternion.identity, transform);
             IPoolable newItem = newObject.GetComponent<IPoolable>();
             newItem.SetNextPool(NextPool);
+            newItem.Free = true;
+            //newItem.SetActive(false);
             _objects[i] = newItem;
         }
-
-        Count *= 2;
     }
 
     public void Restart()

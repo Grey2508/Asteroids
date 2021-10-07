@@ -9,7 +9,7 @@ public class AsteroidBase : MonoBehaviour, IPoolable
 
     [SerializeField] private int Price;
 
-    [SerializeField] private GameObject AsteroidExplosion;
+    private ObjectPool _asteroidExplosionsPool;
 
     protected Rigidbody _rigidbody;
 
@@ -20,9 +20,11 @@ public class AsteroidBase : MonoBehaviour, IPoolable
     {
         _rigidbody = GetComponent<Rigidbody>();
 
-        Free = true;
-        gameObject.SetActive(false);
+        _asteroidExplosionsPool = GameObject.FindWithTag("AsteroidExplosionsPool").GetComponent<ObjectPool>();
+
+        SetActive(false);
     }
+
     public virtual void Create(Vector3 position, Vector3 velocity)
     {
         MonitorAsteroids.CountAsteroids++;
@@ -51,7 +53,10 @@ public class AsteroidBase : MonoBehaviour, IPoolable
         if (other.CompareTag("Player"))
             Score.AddScore(Price);
 
-        //Instantiate(AsteroidExplosion, transform.position, Quaternion.identity);
+        AsteroidEffect effect = _asteroidExplosionsPool.GetNextObject() as AsteroidEffect;
+        effect.transform.position = transform.position;
+        effect.Play();
+
         gameObject.SetActive(false);
 
         Free = true;

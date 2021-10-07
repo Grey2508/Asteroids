@@ -23,6 +23,7 @@ public class PlayerGun : MonoBehaviour
             newBullet.Create(Spawn.position, Spawn.rotation);
 
             _nextShot = Time.time + ShotDelay;
+
             ShotSound.Play();
         }
     }

@@ -11,15 +11,12 @@ public class Bullet : MonoBehaviour, IPoolable
 
     public ObjectPool NextPool { get; }
 
-    private void Awake()
+    private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-
         _lifeTime = GameBoundary.Width / BulletSpeed;
-        _rigidbody.velocity = transform.forward * BulletSpeed;
 
-        Free = true;
-        gameObject.SetActive(false);
+        SetActive(false);
     }
 
     public virtual void Create(Vector3 position, Quaternion rotation)
