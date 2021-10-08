@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     [SerializeField] private int ScoreForLife = 1000;
+    [SerializeField] private AudioSource ExtraLifeSound;
 
     public static int TotalScore
     {
@@ -13,21 +14,29 @@ public class Score : MonoBehaviour
 
     static Text ScoreText;
     static int StaticScoreForLife;
+    static int PointsToLife;
+    static AudioSource StaticExtraLifeSound;
 
     void Start()
     {
         ScoreText = GetComponent<Text>();
         StaticScoreForLife = ScoreForLife;
+        StaticExtraLifeSound = ExtraLifeSound;
     }
 
     public static void AddScore(int value)
     {
         TotalScore += value;
+        PointsToLife += value;
 
         ScoreText.text = TotalScore.ToString();
 
-        if (TotalScore % StaticScoreForLife == 0)
+        if (PointsToLife >= StaticScoreForLife)
+        {
+            StaticExtraLifeSound.Play();
             FindObjectOfType<PlayerHealth>().AddHealth(1);
+            PointsToLife -= StaticScoreForLife;
+        }
     }
 
     public void Restart()
